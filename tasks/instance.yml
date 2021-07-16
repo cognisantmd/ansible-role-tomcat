@@ -3,6 +3,7 @@
   ansible.builtin.group:
     name: "{{ instance.group | default(tomcat_group) }}"
     state: present
+    system: yes
 
 - name: ensure instance user exists
   ansible.builtin.user:
@@ -11,6 +12,8 @@
     group: "{{ instance.group | default(tomcat_group) }}"
     createhome: no
     system: yes
+    home: "{{ tomcat_directory }}/{{ instance.name }}"
+    shell: /sbin/nologin
 
 - name: ensure instance directory exists
   ansible.builtin.file:
@@ -75,16 +78,14 @@
     loop_var: config_file
   when: instance.config_files is defined
 
-- name: create service instance
-  ansible.builtin.import_role:
-    name: robertdebock.service
-  vars:
-    service_list:
-      - name: "{{ instance.name | default(tomcat_name) }}"
-        description: "{{ instance.name | default(tomcat_name) }}"
-        start_command: "/bin/bash {{ tomcat_directory }}/{{ instance.name | default(tomcat_directory) }}/bin/catalina.sh run"
-        user_name: "{{ instance.user | default(tomcat_user) }}"
-        group_name: "{{ instance.group | default(tomcat_group) }}"
+- name: create tomcat service
+  template:
+    src: etc/systemd/system/tomcat.service.j2
+    dest: /etc/systemd/system/tomcat.service
+    owner: root
+    group: root
+    mode: 0644
+  notify: systemctl daemon-reload
 
 - name: manage tomcat service
   ansible.builtin.service:
