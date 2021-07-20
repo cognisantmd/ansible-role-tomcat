@@ -62,14 +62,6 @@
   notify:
     - restart tomcat instance
 
-- name: place neutral default page
-  ansible.builtin.copy:
-    content: "Please select an application by adding the context to the URL."
-    dest: "{{ tomcat_directory }}/{{ instance.name }}/webapps/ROOT/index.html"
-    owner: "{{ instance.user | default(tomcat_user) }}"
-    group: "{{ instance.group | default(tomcat_group) }}"
-    mode: "0640"
-
 - name: loop over config_files
   ansible.builtin.include_tasks:
     file: config_file.yml
