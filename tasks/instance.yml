@@ -78,6 +78,15 @@
     loop_var: config_file
   when: instance.config_files is defined
 
+- name: link tomcat logs directory to /var/log
+  file:
+    src: "{{ tomcat_directory }}/{{ instance.name }}/logs"
+    dest: "/var/log/{{ instance.name }}"
+    state: link
+    owner: "{{ instance.user | default(tomcat_user) }}"
+    group: "{{ instance.group | default(tomcat_group) }}"
+    mode: "0755"
+
 - name: create tomcat service
   template:
     src: etc/systemd/system/tomcat.service.j2
