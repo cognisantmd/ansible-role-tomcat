@@ -16,6 +16,7 @@ tomcat_shutdown_pass: SHUTDOWN
 tomcat_ajp_enabled: yes
 tomcat_ajp_port: 8009
 tomcat_jre_home: /usr
+tomcat_sysconfig_path: /etc/sysconfig
 tomcat_service_state: started
 tomcat_service_enabled: yes
 # You can bind Tomcat to a specified address globally using this variable, or
