@@ -84,6 +84,7 @@
     content: ""
     dest: "{{ tomcat_sysconfig_path }}/{{ instance.name }}"
     force: no
+    mode: "0644"
 
 - name: create tomcat service
   template:
