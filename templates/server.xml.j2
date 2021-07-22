@@ -70,6 +70,7 @@
     <Connector port="{{ instance.non_ssl_connector_port | default(tomcat_non_ssl_connector_port) }}"
                address="{{ instance.address | default(tomcat_address) }}"
                protocol="HTTP/1.1"
+               maxThreads="{{ instance.tomcat_max_threads | default(tomcat_max_threads) }}"
                connectionTimeout="20000"
                redirectPort="{{ instance.ssl_connector_port | default(tomcat_ssl_connector_port) }}" />
     <!-- A "Connector" using the shared thread pool-->
