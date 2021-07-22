@@ -79,6 +79,17 @@
     group: "{{ instance.group | default(tomcat_group) }}"
     mode: "0755"
 
+- name: remove default tomcat applications
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ tomcat_directory }}/{{ instance.name }}/webapps/docs"
+    - "{{ tomcat_directory }}/{{ instance.name }}/webapps/examples"
+    - "{{ tomcat_directory }}/{{ instance.name }}/webapps/host-manager"
+    - "{{ tomcat_directory }}/{{ instance.name }}/webapps/manager"
+    - "{{ tomcat_directory }}/{{ instance.name }}/webapps/ROOT"
+
 - name: make sure tomcat sysconfig file exists
   copy:
     content: ""
