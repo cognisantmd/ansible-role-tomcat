@@ -71,6 +71,7 @@
                address="{{ instance.address | default(tomcat_address) }}"
                protocol="HTTP/1.1"
                maxThreads="{{ instance.tomcat_max_threads | default(tomcat_max_threads) }}"
+               server="{{ instance.tomcat_server_name | default(tomcat_server_name) }}"
                connectionTimeout="20000"
                redirectPort="{{ instance.ssl_connector_port | default(tomcat_ssl_connector_port) }}" />
     <!-- A "Connector" using the shared thread pool-->

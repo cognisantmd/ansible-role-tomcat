@@ -17,6 +17,7 @@ tomcat_ajp_enabled: yes
 tomcat_ajp_port: 8009
 tomcat_jre_home: /usr
 tomcat_max_threads: 600
+tomcat_server_name: tomcat
 tomcat_remote_ip_valve: yes
 tomcat_sysconfig_path: /etc/sysconfig
 tomcat_service_state: started
