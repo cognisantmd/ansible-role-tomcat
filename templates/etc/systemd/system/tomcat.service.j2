@@ -10,6 +10,8 @@ After=syslog.target network.target
 [Service]
 Type=forking
 
+WorkingDirectory={{ tomcat_directory }}/{{ instance.name }}
+
 Environment=CATALINA_PID={{ tomcat_directory }}/{{ instance.name }}/temp/tomcat.pid
 Environment=CATALINA_HOME={{ tomcat_directory }}/{{ instance.name }}
 Environment=CATALINA_BASE={{ tomcat_directory }}/{{ instance.name }}
