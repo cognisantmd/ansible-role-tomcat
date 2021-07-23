@@ -89,6 +89,8 @@
     - "{{ tomcat_directory }}/{{ instance.name }}/webapps/host-manager"
     - "{{ tomcat_directory }}/{{ instance.name }}/webapps/manager"
     - "{{ tomcat_directory }}/{{ instance.name }}/webapps/ROOT"
+  notify:
+    - restart tomcat instance
 
 - name: make sure tomcat sysconfig file exists
   copy:
