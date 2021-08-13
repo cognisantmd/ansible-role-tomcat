@@ -20,6 +20,7 @@ tomcat_max_threads: 600
 tomcat_server_name: tomcat
 tomcat_remote_ip_valve: yes
 tomcat_sysconfig_path: /etc/sysconfig
+tomcat_logs_path: /var/log
 tomcat_service_state: started
 tomcat_service_enabled: yes
 # You can bind Tomcat to a specified address globally using this variable, or

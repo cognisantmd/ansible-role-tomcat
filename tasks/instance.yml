@@ -70,10 +70,29 @@
     loop_var: config_file
   when: instance.config_files is defined
 
-- name: link tomcat logs directory to /var/log
+- name: create logs folder
   file:
-    src: "{{ tomcat_directory }}/{{ instance.name }}/logs"
-    dest: "/var/log/{{ instance.name }}"
+    path: "{{ tomcat_logs_path }}/{{ instance.name }}"
+    state: directory
+    owner: "{{ instance.user | default(tomcat_user) }}"
+    group: root
+    mode: "0755"
+
+- name: check current tomcat logs folder symlink
+  stat:
+    path: "{{ tomcat_directory }}/{{ instance.name }}/logs"
+    register: logs_dir_available
+
+- name: remove installation logs folder (only if it's not symlinked)
+  file:
+    path: "{{ tomcat_directory }}/{{ instance.name }}/logs"
+    state: absent
+  when: logs_dir_available.stat.isdir is defined and logs_dir_available.stat.isdir
+
+- name: link tomcat logs directory
+  file:
+    src: "{{ tomcat_logs_path }}/{{ instance.name }}"
+    dest: "{{ tomcat_directory }}/{{ instance.name }}/logs"
     state: link
     owner: "{{ instance.user | default(tomcat_user) }}"
     group: "{{ instance.group | default(tomcat_group) }}"
