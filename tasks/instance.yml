@@ -81,7 +81,7 @@
 - name: check current tomcat logs folder symlink
   stat:
     path: "{{ tomcat_directory }}/{{ instance.name }}/logs"
-    register: logs_dir_available
+  register: logs_dir_available
 
 - name: remove installation logs folder (only if it's not symlinked)
   file:
