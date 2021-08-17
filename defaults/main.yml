@@ -23,6 +23,7 @@ tomcat_sysconfig_path: /etc/sysconfig
 tomcat_logs_path: /var/log
 tomcat_service_state: started
 tomcat_service_enabled: yes
+tomcat_service_allow_restart: yes
 # You can bind Tomcat to a specified address globally using this variable, or
 # in the `tomcat_instances`. The `tomcat_instances.address` is more specific
 # so it takes priority over `tomcat_address`.
