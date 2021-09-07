@@ -75,7 +75,7 @@
     path: "{{ tomcat_logs_path }}/{{ instance.name }}"
     state: directory
     owner: "{{ instance.user | default(tomcat_user) }}"
-    group: root
+    group: "{{ instance.group | default(tomcat_group) }}"
     mode: "0755"
 
 - name: check current tomcat logs folder symlink
